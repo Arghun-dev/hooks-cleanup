@@ -194,3 +194,16 @@ export default function FetchCancel({ url }) {
   })
 }
 ```
+
+
+## cleanup setInterval in hooks
+
+```js
+useEffect(() => {
+    const interval = setInterval(() => {
+      setCounter((oldCounter) => (oldCounter === 0 ? 0 : oldCounter - 1))
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
+```
