@@ -86,7 +86,9 @@ function Component() {
 
 ## Cancelling a Fetch request in a useEffect hook
 
-**version 1**
+### AxiosCancel.js
+
+**version 1** 
 
 ```js
 import React, { useState, useEffect } from 'react'
@@ -121,7 +123,7 @@ export default function fetcher({ url }) {
 }
 ```
 
-**version2**
+**version2** 
 Here instead of having a variable that kept track of whether the component was sort of still valid, whether it is still mounted, `We switched to using axios.cancelToken`. So that what we can actually do, is `cancel the entire Ajax call` if the `cleanup` function of our effect gets run.
 
 ```js
@@ -153,6 +155,41 @@ export default function AxiosCancel({url}) {
     return () => {
       console.log('axios cancel unmounting')
       source.cancel()
+    }
+  })
+}
+```
+
+
+### FetchCancel.js
+
+**Here we should use `AbortController` which basically send a signal to our fetch call when we want to cancel the Ajax request** 
+
+```js
+import React, { useState, useEffect } from 'react'
+
+export default function FetchCancel({ url }) {
+  const [data, setData] = useState(null)
+  
+  useEffect(() => {
+    let controller = new AbortController()
+    
+    const loadData = async () => {
+      try {
+        const response = await fetch(url, { signal: controller.signal })
+        const data = await response.json()
+        console.log("data got")
+        setData(data)
+      } catch (err) {
+        throw err
+      }
+    }
+    
+    loadData()
+    
+    return () => {
+      console.log('cleanup fetch request')
+      controller.abort()
     }
   })
 }
