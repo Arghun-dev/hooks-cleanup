@@ -161,7 +161,7 @@ export default function AxiosCancel({url}) {
 ```
 
 
-### ## Cancelling a fetch request in a useEffect hook
+## Cancelling a fetch request in a useEffect hook
 
 **Here we should use `AbortController` which basically send a signal to our fetch call when we want to cancel the Ajax request** 
 
