@@ -196,7 +196,7 @@ export default function FetchCancel({ url }) {
 ```
 
 
-## cleanup setInterval in hooks
+## cleanup setInterval & setTimeout in hooks
 
 ```js
 useEffect(() => {
