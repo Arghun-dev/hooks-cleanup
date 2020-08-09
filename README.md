@@ -118,3 +118,5 @@ export default function fetcher({ url }) {
   return <div>{JSON.stringify(data)}</div>
 }
 ```
+
+**This is pretty clear!**
