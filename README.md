@@ -84,7 +84,7 @@ function Component() {
 **So when you want to execute some cleanup code, you include it in a function, and return that function from the function passed to useEffect**
 
 
-## Cancelling a Fetch request in a useEffect hook
+## Cancelling a axios request in a useEffect hook
 
 ### AxiosCancel.js
 
@@ -161,7 +161,7 @@ export default function AxiosCancel({url}) {
 ```
 
 
-### FetchCancel.js
+### ## Cancelling a fetch request in a useEffect hook
 
 **Here we should use `AbortController` which basically send a signal to our fetch call when we want to cancel the Ajax request** 
 
