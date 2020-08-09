@@ -80,3 +80,39 @@ function Component() {
 ```
 
 **So when you want to execute some cleanup code, you include it in a function, and return that function from the function passed to useEffect**
+
+
+## Cancelling a Fetch request in a useEffect hook
+
+```js
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+
+export default function fetcher({ url }) {
+  const [data, setData] = useState(null)
+  
+  useEffect(() => {
+    let mounted = true
+  
+    const loadData = async () => {
+      const response = await axios.get(url)
+      
+      if (mounted) {
+        setData(response.data)
+      }
+    }
+    
+    loadData()
+    
+    return () => {
+      mounted = false
+    }
+  }, [url])
+  
+  if (!data) {
+    return <div>Loading Data from {url}</div>
+  }
+  
+  return <div>{JSON.stringify(data)}</div>
+}
+```
